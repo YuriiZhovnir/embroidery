@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Embroidery</string>
+    <string name="my_patterns">My patterns</string>
+    <string name="press_to_get_started">Press \'+\' to get started</string>
+    <string name="cancel">Cancel</string>
+    <string name="done">Done</string>
+    <string name="height">Height</string>
+    <string name="width">Width</string>
+    <string name="enter_a_number">Enter a number between 10 and 150.</string>
+    <string name="new_pattern">New Pattern</string>
+    <string name="more">More</string>
+    <string name="email">Email</string>
+    <string name="send_feedback">Send Feedback</string>
+    <string name="ok">ОК</string>
+    <string name="privacy_policy_information">Your data is stored on your device and backed up as part of your normal backup. Your data is never transmitted to third parties.</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="rate_app">Rate App</string>
+    <string name="share_app">Share App</string>
+    <string name="version">Version </string>
+    <string name="show_list_pdf">Show List (PDF)</string>
+    <string name="hide_list_image">Hide List (Image)</string>
+    <string name="export_palette">Export Palette</string>
+    <string name="delete">DELETE</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="change_palette">Change Palette</string>
+    <string name="dmc_d">DMC (D)</string>
+    <string name="anchor_a">Anchor (A)</string>
+</resources>

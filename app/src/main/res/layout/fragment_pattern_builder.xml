@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginStart="-13dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/openBtnSheetDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="?attr/actionBarSize"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:src="@drawable/ic_delete_pink_24dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/done"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/goToNextFragmentDone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="?attr/actionBarSize"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:src="@drawable/ic_arrow_forward_pink_24dp" />
+            </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:gravity="center_vertical|center"
+            android:orientation="vertical">
+
+            <com.otaliastudios.zoom.ZoomLayout
+                android:id="@+id/zoomLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/black"
+                android:scrollbars="vertical|horizontal"
+                app:alignment="center"
+                app:animationDuration="280"
+                app:flingEnabled="true"
+                app:hasClickableChildren="true"
+                app:horizontalPanEnabled="true"
+                app:maxZoom="15.5"
+                app:maxZoomType="zoom"
+                app:minZoom="1"
+                app:minZoomType="zoom"
+                app:oneFingerScrollEnabled="true"
+                app:overPinchable="true"
+                app:overScrollHorizontal="true"
+                app:overScrollVertical="true"
+                app:scrollEnabled="true"
+                app:threeFingersScrollEnabled="true"
+                app:transformation="centerInside"
+                app:transformationGravity="auto"
+                app:twoFingersScrollEnabled="true"
+                app:verticalPanEnabled="true"
+                app:zoomEnabled="true">
+
+                <TableLayout
+                    android:id="@+id/tableLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/black"/>
+            </com.otaliastudios.zoom.ZoomLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/panelInstrument"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/choosePalette"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_weight="1"
+                android:scaleType="center"
+                android:src="@drawable/ic_palette_pink_24dp" />
+
+            <ImageView
+                android:id="@+id/cancelColor"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_weight="1"
+                android:scaleType="center"
+                android:src="@drawable/ic_undo_pink_24dp" />
+
+            <ImageView
+                android:id="@+id/colorPicker"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_weight="1"
+                android:scaleType="center"
+                android:src="@drawable/ic_colorize_pink_24dp" />
+
+            <ImageView
+                android:id="@+id/btnDeleteColor"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_weight="1"
+                android:scaleType="center"
+                android:src="@drawable/ic_stop_pink_24dp" />
+
+            <ImageView
+                android:id="@+id/btnOnTouchListener"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_weight="1"
+                android:scaleType="center"
+                android:src="@drawable/ic_lock_pink_24dp" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/colorsList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
