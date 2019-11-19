@@ -156,7 +156,7 @@ class PatternBuilderFragment : BaseFragment() {
             pattern?.width?.let { width ->
                 for (i in 0..height) {
                     val row = TableRow(requireContext())
-                    val ll = FrameLayout.LayoutParams(MATCH_PARENT, 60)
+                    val ll = FrameLayout.LayoutParams(MATCH_PARENT, 30)
                     row.layoutParams = ll
                     for (j in 0..width) {
                         val imageView = context?.let { ImageView(it) }
@@ -173,7 +173,7 @@ class PatternBuilderFragment : BaseFragment() {
                         } else {
                             cell.color?.colorCode?.let { imageView?.setBackgroundColor(it) }
                         }
-                        imageView?.layoutParams = TableRow.LayoutParams(24, 24)
+                        imageView?.layoutParams = TableRow.LayoutParams(30, 30)
                         imageView?.setOnClickListener {
                             if (GlobalData.clearMode) {
                                 if (it.background is ColorDrawable) {
