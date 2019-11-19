@@ -16,6 +16,7 @@ import jdroidcoder.ua.embroidery.adapter.OnItemClick
 import jdroidcoder.ua.embroidery.adapter.PatternAdapter
 import kotlinx.android.synthetic.main.fragment_my_patterns.*
 
+
 class MyPatternsFragment : BaseFragment(), OnItemClick {
 
     companion object {
@@ -35,6 +36,7 @@ class MyPatternsFragment : BaseFragment(), OnItemClick {
             patternsList?.adapter = PatternAdapter(this)
         }
     }
+
 
     @OnClick(R.id.addPattern)
     fun addPattern() {
@@ -100,5 +102,15 @@ class MyPatternsFragment : BaseFragment(), OnItemClick {
                         ?.commit()
             }
         }
+    }
+
+    @OnClick(R.id.more)
+    fun more() {
+        toolbar.visibility = View.GONE
+        val fragment = MoreFragment.newInstance()
+        activity?.supportFragmentManager?.beginTransaction()
+                ?.replace(android.R.id.content, fragment,MoreFragment.TAG)
+                ?.addToBackStack(MoreFragment.TAG)
+                ?.commit()
     }
 }

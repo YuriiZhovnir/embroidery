@@ -5,6 +5,8 @@
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_marginStart="-13dp">
@@ -15,6 +17,7 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/more"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:paddingStart="20dp"
@@ -40,6 +43,7 @@
                 android:paddingEnd="20dp"
                 android:src="@drawable/ic_add_black_24dp" />
         </LinearLayout>
+
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -50,9 +54,9 @@
         android:visibility="gone" />
 
     <TextView
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:text="@string/press_to_get_started" />
+
 </LinearLayout>

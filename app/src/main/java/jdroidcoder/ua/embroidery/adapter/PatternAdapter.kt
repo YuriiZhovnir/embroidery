@@ -28,7 +28,6 @@ class PatternAdapter(val listener: OnItemClick) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = this?.patterns?.get(position)
-
         //TODO: get image from database
         holder.preview?.setImageBitmap(item?.preview?.let { Util.stringToBitMap(it) })
         holder.item.setOnClickListener {

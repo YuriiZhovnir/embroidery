@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/text_more"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:gravity="center"
+                android:text="@string/more"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/btnMoreDone"
+                android:background="@android:color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_alignParentRight="true"
+                android:paddingRight="8dp"
+                android:layout_marginRight="4dp"
+                android:gravity="center"
+                android:text="@string/done"
+                android:textColor="@color/colorAccent" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/feedBackMore"
+            android:textColor="@android:color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:drawableLeft="@drawable/ic_message_pink_24dp"
+            android:drawablePadding="5dp"
+            android:text="@string/send_feedback" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="8dp"
+            android:background="#808080" />
+
+        <TextView
+            android:textColor="@android:color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:drawableLeft="@drawable/ic_star_pink_24dp"
+            android:drawablePadding="5dp"
+            android:text="@string/rate_app" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="8dp"
+            android:background="#808080" />
+
+        <TextView
+            android:textColor="@android:color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:drawableLeft="@drawable/ic_people_pink_24dp"
+            android:drawablePadding="5dp"
+            android:text="@string/share_app" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#808080" />
+
+        <TextView
+            android:id="@+id/version"
+            android:textColor="@android:color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/version" />
+
+        <TextView
+            android:id="@+id/informationPP"
+            android:textColor="@color/colorAccent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/privacy_policy" />
+    </LinearLayout>
+    <include
+        android:id="@+id/bottomSheetFeedback"
+        layout="@layout/feedback_bottom_sheet" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

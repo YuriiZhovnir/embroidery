@@ -25,4 +25,9 @@
     <string name="change_palette">Change Palette</string>
     <string name="dmc_d">DMC (D)</string>
     <string name="anchor_a">Anchor (A)</string>
+    <string name="export">Export</string>
+    <string name="image">Image</string>
+    <string name="total_stitches">Total stitches:</string>
+    <string name="dimensions">Dimensions:</string>
+    <string name="pdf">PDF</string>
 </resources>

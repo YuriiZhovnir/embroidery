@@ -18,6 +18,7 @@ import io.realm.RealmList
 import jdroidcoder.ua.embroidery.Cell
 import jdroidcoder.ua.embroidery.CellColor
 import jdroidcoder.ua.embroidery.Pattern
+import jdroidcoder.ua.embroidery.R
 import jdroidcoder.ua.embroidery.adapter.AnchorPaletteAdapter
 import jdroidcoder.ua.embroidery.adapter.DMCPaletteAdapter
 import jdroidcoder.ua.embroidery.helper.ColorsAnchor
@@ -25,9 +26,11 @@ import jdroidcoder.ua.embroidery.helper.ColorsDMC
 import jdroidcoder.ua.embroidery.helper.GlobalData
 import kotlinx.android.synthetic.main.fragment_pattern_builder.*
 import java.util.*
-import jdroidcoder.ua.embroidery.R
 import jdroidcoder.ua.embroidery.adapter.ColorListAdapter
 import jdroidcoder.ua.embroidery.helper.Util
+
+
+
 
 class PatternBuilderFragment : BaseFragment() {
 
@@ -49,7 +52,11 @@ class PatternBuilderFragment : BaseFragment() {
     private val realm = Realm.getDefaultInstance()
     private var pattern: Pattern? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater?.inflate(R.layout.fragment_pattern_builder, container, false)
     }
 
@@ -84,7 +91,11 @@ class PatternBuilderFragment : BaseFragment() {
                     val offsetViewBounds = Rect()
                     view1.getDrawingRect(offsetViewBounds)
                     tableLayout.offsetDescendantRectToMyCoords(view1, offsetViewBounds)
-                    if (true == offsetViewBounds.contains(motionEvent.x?.toInt(), motionEvent.y?.toInt())) {
+                    if (true == offsetViewBounds.contains(
+                            motionEvent.x?.toInt(),
+                            motionEvent.y?.toInt()
+                        )
+                    ) {
                         view1?.performClick()
                     }
                 }
@@ -141,7 +152,6 @@ class PatternBuilderFragment : BaseFragment() {
     }
 
     private fun drawTable() {
-        println(pattern)
         pattern?.height?.let { height ->
             pattern?.width?.let { width ->
                 for (i in 0..height) {
@@ -150,7 +160,8 @@ class PatternBuilderFragment : BaseFragment() {
                     row.layoutParams = ll
                     for (j in 0..width) {
                         val imageView = context?.let { ImageView(it) }
-                        val cell = pattern?.cells?.firstOrNull { p -> p.position[0] == i && p.position[1] == j }
+                        val cell =
+                            pattern?.cells?.firstOrNull { p -> p.position[0] == i && p.position[1] == j }
                         val cellTag = if (null == cell) {
                             (Random().nextInt() + i * j).toString()
                         } else {
@@ -162,20 +173,16 @@ class PatternBuilderFragment : BaseFragment() {
                         } else {
                             cell.color?.colorCode?.let { imageView?.setBackgroundColor(it) }
                         }
-                        imageView?.layoutParams = TableRow.LayoutParams(60, 60)
-                        if (null == cell) {
-                            realm.beginTransaction()
-                            val pettern = realm.where(Pattern::class.java).equalTo("id", patternId).findFirst()
-                            val position = RealmList<Int>()
-                            position.add(i)
-                            position.add(j)
-                            pettern?.cells?.add(Cell(cellTag, position, CellColor(null, 0)))
-                            realm.commitTransaction()
-                        }
+                        imageView?.layoutParams = TableRow.LayoutParams(24, 24)
                         imageView?.setOnClickListener {
                             if (GlobalData.clearMode) {
                                 if (it.background is ColorDrawable) {
-                                    changes.add(LastChange(it.tag.toString(), (it.background as ColorDrawable).color))
+                                    changes.add(
+                                        LastChange(
+                                            it.tag.toString(),
+                                            (it.background as ColorDrawable).color
+                                        )
+                                    )
                                 }
                                 realm.beginTransaction()
                                 cell?.color?.colorName = ""
@@ -185,29 +192,58 @@ class PatternBuilderFragment : BaseFragment() {
                                 it.setBackgroundResource(R.drawable.ic_clear_black_24dp)
                             } else {
                                 if (it.background is ColorDrawable) {
-                                    changes.add(LastChange(it.tag.toString(), (it.background as ColorDrawable).color))
+                                    changes.add(
+                                        LastChange(
+                                            it.tag.toString(),
+                                            (it.background as ColorDrawable).color
+                                        )
+                                    )
                                 } else {
-                                    changes.add(LastChange(it.tag.toString(), Color.TRANSPARENT))
+                                    changes.add(
+                                        LastChange(
+                                            it.tag.toString(),
+                                            Color.TRANSPARENT
+                                        )
+                                    )
                                 }
                                 if (true == GlobalData.colorPickerMode) {
                                     if (it.background is ColorDrawable) {
-                                        GlobalData.currentColor = (it.background as ColorDrawable).color
+                                        GlobalData.currentColor =
+                                            (it.background as ColorDrawable).color
                                     }
                                     colorPicker()
                                 } else {
                                     GlobalData.currentColor
-                                            ?.let { it1 ->
-                                                it?.setBackgroundColor(it1)
-                                            }
+                                        ?.let { it1 ->
+                                            it?.setBackgroundColor(it1)
+                                        }
                                 }
                             }
                             realm.beginTransaction()
                             if (it.background is ColorDrawable) {
                                 val backgroundColor = (it.background as ColorDrawable).color
-                                val tempColor = ColorsAnchor.values()?.firstOrNull { p -> Color.rgb(p.r, p.g, p.b) == backgroundColor }
-                                val cell = realm.where(Cell::class.java)
-                                        .equalTo("tag", it.tag?.toString())
-                                        .findFirst()
+                                val tempColor = ColorsAnchor.values()?.firstOrNull { p ->
+                                    Color.rgb(
+                                        p.r,
+                                        p.g,
+                                        p.b
+                                    ) == backgroundColor
+                                }
+                                var cell = realm.where(Cell::class.java)
+                                    .equalTo("tag", it.tag?.toString())
+                                    .findFirst()
+                                if (cell == null) {
+                                    val pettern =
+                                        realm.where(Pattern::class.java).equalTo("id", patternId)
+                                            .findFirst()
+//                                    pattern?.deleteFromRealm()
+
+                                    cell = Cell()
+                                    val position = RealmList<Int>()
+                                    position.add(i)
+                                    position.add(j)
+                                    pettern?.cells?.add(Cell(cellTag, position, CellColor(null, 0)))
+                                }
                                 cell?.color?.colorCode = backgroundColor
                                 cell?.color?.colorName = tempColor?.toString()
                                 realm?.insertOrUpdate(cell)
@@ -253,6 +289,10 @@ class PatternBuilderFragment : BaseFragment() {
 
     @OnClick(R.id.goToNextFragmentDone)
     fun goToNextFragmentDone() {
+        pdfAndImage.visibility = View.VISIBLE
+        callBack?.visibility = View.VISIBLE
+        openBtnSheetDelete?.visibility = View.GONE
+        goToNextFragmentDone?.visibility = View.GONE
         panelInstrument?.visibility = View.GONE
         zoomLayout?.apply {
             val bitmap = Bitmap.createBitmap(this?.width, this?.height, Bitmap.Config.ARGB_8888)
@@ -282,7 +322,8 @@ class PatternBuilderFragment : BaseFragment() {
         val closeBottomSheetDelete = view.findViewById<TextView>(R.id.closeBottomSheetDelete)
         bntDelete.setOnClickListener {
             realm?.beginTransaction()
-            realm.where(Pattern::class.java).equalTo("id", patternId)?.findFirst()?.deleteFromRealm()
+            realm.where(Pattern::class.java).equalTo("id", patternId)?.findFirst()
+                ?.deleteFromRealm()
             realm.commitTransaction()
             dialog.dismiss()
             activity?.supportFragmentManager?.popBackStack()
@@ -294,6 +335,80 @@ class PatternBuilderFragment : BaseFragment() {
         dialog.setContentView(view)
         dialog.show()
     }
+
+    @OnClick(R.id.callBack)
+    fun callBack() {
+        pdfAndImage.visibility = View.GONE
+        callBack?.visibility = View.GONE
+        openBtnSheetDelete?.visibility = View.VISIBLE
+        goToNextFragmentDone?.visibility = View.VISIBLE
+        panelInstrument?.visibility = View.VISIBLE
+        val layoutManager = GridLayoutManager(context, 5, GridLayoutManager.VERTICAL, false)
+        colorsList.layoutManager = layoutManager
+        colorsList.adapter = AnchorPaletteAdapter(ColorsAnchor.values())
+    }
+
+    @OnClick(R.id.pdfAndImage)
+    fun pdfAndImage() {
+        val dialog = BottomSheetDialog(requireContext(), R.style.CustomBottomSheetDialogTheme)
+        val view = layoutInflater.inflate(R.layout.pdf_image_btn_sheet, null)
+        val openPDF = view.findViewById<TextView>(R.id.showListPDF)
+        val hideListImage = view.findViewById<TextView>(R.id.hideListImage)
+        val closePaletteBS = view.findViewById<TextView>(R.id.closeBottomSheetExport)
+        openPDF.setOnClickListener {
+            val fragment = PDFFragment.newInstance(patternId)
+            fragmentManager
+                ?.beginTransaction()
+                ?.replace(android.R.id.content, fragment, PDFFragment.TAG)
+                ?.addToBackStack(PDFFragment.TAG)
+                ?.commit()
+            dialog.dismiss()
+
+        }
+        hideListImage.setOnClickListener {
+            image.setImageBitmap(pattern?.preview.let { it?.let { it1 -> Util.stringToBitMap(it1) } })
+            image.visibility = View.VISIBLE
+            tableLayout.visibility = View.GONE
+            panelInstrument?.visibility = View.GONE
+            colorsList.visibility = View.GONE
+            zoomLayout.visibility = View.GONE
+            callBack.visibility = View.GONE
+            done.visibility = View.GONE
+            pdfAndImage.visibility = View.GONE
+            cancelImage.visibility = View.VISIBLE
+            exportImage.visibility = View.VISIBLE
+            imageTitle.visibility = View.VISIBLE
+//            zoomImageView?.visibility = View.VISIBLE
+//            zoomImage.visibility = View.VISIBLE
+
+            dialog.dismiss()
+        }
+        closePaletteBS.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.setCancelable(false)
+        dialog.setContentView(view)
+        dialog.show()
+    }
+
+    @OnClick(R.id.cancelImage)
+    fun cancelImage() {
+        tableLayout.visibility = View.VISIBLE
+        panelInstrument?.visibility = View.VISIBLE
+        colorsList.visibility = View.VISIBLE
+        zoomLayout.visibility = View.VISIBLE
+        callBack.visibility = View.VISIBLE
+        done.visibility = View.VISIBLE
+        pdfAndImage.visibility = View.VISIBLE
+        cancelImage.visibility = View.GONE
+        exportImage.visibility = View.GONE
+        imageTitle.visibility = View.GONE
+        image.visibility = View.GONE
+//        zoomImageView.visibility = View.GONE
+//        zoomImage.visibility = View.GONE
+    }
+
 }
+
 
 class LastChange(var tag: String? = null, var color: Int? = null)

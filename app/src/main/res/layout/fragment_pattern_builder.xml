@@ -22,21 +22,53 @@
                 android:orientation="horizontal">
 
                 <ImageView
+
                     android:id="@+id/openBtnSheetDelete"
                     android:layout_width="wrap_content"
                     android:layout_height="?attr/actionBarSize"
                     android:paddingStart="20dp"
                     android:paddingEnd="20dp"
-                    android:src="@drawable/ic_delete_pink_24dp" />
+                    android:src="@drawable/ic_delete_pink_24dp"
+                    android:visibility="visible"/>
+                <ImageView
+                    android:id="@+id/callBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="?attr/actionBarSize"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:src="@drawable/ic_arrow_back_pink_24dp"
+                    android:visibility="gone"/>
+                <TextView
+                    android:id="@+id/cancelImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="?attr/actionBarSize"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:text="@string/cancel"
+                    android:textColor="@color/colorAccent"
+                    android:visibility="gone"/>
+
 
                 <TextView
+                    android:id="@+id/done"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/done"
                     android:textColor="@color/colorAccent"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="visible"/>
+                <TextView
+                    android:id="@+id/imageTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/image"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
 
                 <ImageView
                     android:id="@+id/goToNextFragmentDone"
@@ -44,9 +76,32 @@
                     android:layout_height="?attr/actionBarSize"
                     android:paddingStart="20dp"
                     android:paddingEnd="20dp"
-                    android:src="@drawable/ic_arrow_forward_pink_24dp" />
+                    android:src="@drawable/ic_arrow_forward_pink_24dp"
+                    android:visibility="visible"/>
+                <ImageView
+                    android:id="@+id/pdfAndImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="?attr/actionBarSize"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:src="@drawable/ic_file_upload_pink_24dp"
+                    android:visibility="gone"/>
+                <TextView
+                    android:id="@+id/exportImage"
+                    android:text="@string/export"
+                    android:textColor="@color/colorAccent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="?attr/actionBarSize"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:visibility="gone"/>
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
+        <com.otaliastudios.zoom.ZoomImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="match_parent"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,6 +110,7 @@
             android:orientation="vertical">
 
             <com.otaliastudios.zoom.ZoomLayout
+                android:visibility="visible"
                 android:id="@+id/zoomLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -80,13 +136,14 @@
                 app:twoFingersScrollEnabled="true"
                 app:verticalPanEnabled="true"
                 app:zoomEnabled="true">
-
                 <TableLayout
                     android:id="@+id/tableLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="visible"
                     android:background="@android:color/black"/>
             </com.otaliastudios.zoom.ZoomLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -135,12 +192,11 @@
                 android:scaleType="center"
                 android:src="@drawable/ic_lock_pink_24dp" />
         </LinearLayout>
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/colorsList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
+            android:layout_height="match_parent"
+            android:visibility="visible"/>
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

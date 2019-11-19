@@ -3,8 +3,10 @@ package jdroidcoder.ua.embroidery
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import butterknife.ButterKnife
+import butterknife.OnClick
 import jdroidcoder.ua.embroidery.fragment.MyPatternsFragment
 import io.realm.Realm
+import jdroidcoder.ua.embroidery.fragment.MoreFragment
 
 class MainActivity : AppCompatActivity() {
 
